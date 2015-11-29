@@ -2,13 +2,40 @@
 
 # There are many ways to create or initialize an array.
 # One way is with the new class method
-names1 = Array.new(4)
-names2 = Array.new(4, true)
-puts names1
-puts names2
 
-names3 = [true, true, true, true]
-puts names3
+# A new array can be created by using the literal constructor [].
+# Arrays can contain different types of objects. For Example,
+# the array below contains an Integer, a String and a Float:
 
-names4 = Array(0..3)
-puts names4
+ary = [1, 'two', 3.0]
+puts ary
+
+# An array can also be created by explicitly calling ::new with zero,
+# one (the initial size of the Array) or two arguments
+# (the initial size and a default object)
+
+ary = Array.new
+puts ary
+
+ary = Array.new(4)
+puts ary
+
+ary = Array.new(4, true)
+puts ary
+
+# Note that the second argument populates the array with references
+# to the same object. Therefore, it is only recommended in cases when
+# you need to instantiate arrays with natively immutable objects such as
+# Symbols, numbers, true of false.
+
+ary = Array.new(4) { Hash.new }
+puts ary
+
+# An array can also be created by using the Array() method, provided by
+# Kernel, which tries to call to_ary, then to_a its argument.
+
+ary = Array({:a => "a", :b => "b"})
+puts ary
+
+ary = Array((1..5))
+puts ary
