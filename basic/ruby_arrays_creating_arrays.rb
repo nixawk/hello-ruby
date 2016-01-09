@@ -39,3 +39,9 @@ puts ary
 
 ary = Array((1..5))
 puts ary
+
+# Sometimes creating arrays of words can be a pain, what with all the quotes
+# and commas. Fortunately, there's a shortcut: %w does just what we want.
+
+a = %w{ ant bee cat dog elk }
+puts a
