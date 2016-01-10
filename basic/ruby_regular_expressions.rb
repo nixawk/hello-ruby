@@ -29,4 +29,37 @@ end
 puts line.sub(/Perl/, 'Ruby')      # replace first 'Perl' with 'Ruby'
 puts line.gsub(/Python/, 'Ruby')   # replace every 'Python' with 'Ruby'
 
+# Regular expressions are objects of type Regexp. They can be created by
+# calling the constructor explicitly or by using the literal forms /pattern/
+# and %r\pattern\.
 
+a = Regexp.new('^\s*[a-z]')      # /^\s*[a-z]/
+b = /^\s*[a-z]/                  # /^\s*[a-z]/
+c = %r{^\s*[a-z]}                # /^\s*[a-z]/
+
+# Once you have a regular expression object, you can match it against a string
+# using Regexp#match(aString) or the match operators =~ (positive match) and
+# !~ (negative match). The match operators are defined for both String and
+# Regexp objects. If both operands of the match operator are strings, the one
+# on the right will be converted to a regular expression.
+
+# The match operators return the character position at which the match
+# occurred. They also have the side effect of setting a whole load of Ruby
+# variables. ($&) receives the part of the string that was matched by the
+# pattern, ($`) receives the string that preceded the match, and ($') receives the
+# string after the match.
+
+def showRE(a, re)
+  if a =~ re
+    "#{$`}<<#{$&}>>#{$'}"
+  else
+    'no match'
+  end
+end
+
+puts showRE('very interesting', /t/)
+puts showRE('Fats Waller', /ll/)
+
+# The match also sets the thread-global variables $~ and $1 through $9.
+# The variable $~ is a MatchData object that holds everything you might want
+# to know about the match. $1 and so on hold the values of parts of the match.
