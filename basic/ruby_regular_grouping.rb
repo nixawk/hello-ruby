@@ -17,3 +17,11 @@ puts $&
 puts $1
 puts $2
 puts $3
+
+re = /(\d+):(\d+)/
+md = re.match("Time: 12:34am")
+# md[0]           # $&
+# md[1]           # $1
+# md[2]           # $2
+# md.pre_match    # $`
+# md.post_match   # $'
