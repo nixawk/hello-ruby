@@ -1,95 +1,94 @@
 
 
-# When designing a class interface, it's important to consider just how much
-# access to your class you'll be exposing to the outside world. Allow too much
-# access into your class, and you risk increasing the coupling in your
-# application users of your classs will be tempted to rely on details of your
-# class's implementation, rather than on its logical interface. The good news
-# is that the only way to change an object's state in Ruby is by calling one
-# of its methods. A good rule of thumb is never to expose methods that could
-# leave an object in an invalid state. Ruby gives us three levels of
-# protection.
-#
-#  - Public methods: can be called by anyone -- there is no access control.
+## Access Control
+
+#  - [Public methods]: can be called by anyone -- there is no access control.
 #    Methods are public by default (except for initialize, which is always
 #    private).
 #
-#  - Protected methods: can be invoked only by objects of the defining class
+#  - [Protected methods]: can be invoked only by objects of the defining class
 #    and its subclasses. Access is kept within the family.
 #
-#  - Private  methods: cannot be called with an explicit receiver. Because you
+#  - [Private  methods]: cannot be called with an explicit receiver. Because you
 #    cannot specify an object when using them, private methods can be called
 #    only in defining class and by direct descendents within that same object.
 
+# The difference between "protected" and "private" is fairly subtle, and is different
+# in Ruby than in most common OO languages.
+# If a method is protected, it may be called by any instance of the defining class or its subclasses.
 
-class ClsOne
-  def method1   # default os 'public'
-    puts 'ClsOne - method1'
+# If a method is private, it may be called only within the context of the calling object--it is nevner
+# possible to access another object's private methods directory, even if the object is of the same
+# class as the caller.
+
+
+# You specify access levels to methods within class or module definitions using one
+# or more of the three functions public, protected, and private.
+
+class ClassOne
+  def default_method   # default os 'public'
+    puts 'ClassOne - default_method'
   end
 
   protected
-
-  def method2   # will be 'protected'
-    puts 'ClsOne - protected method2'
+  def protected_method   # will be 'protected', only called in subclass
+    puts 'ClassOne - protected_method'
   end
 
   private
-  def method3   # will be 'private'
-    puts 'ClsOne - ptivate method3'
+  def private_method   # will be 'private', only called in parent class
+    puts 'ClassOne - private_method'
   end
 
   public
-  def method4   # will be 'public'
-    puts 'ClsOne - public method4'
+  def public_method   # will be 'public'
+    puts 'ClassOne - public_method'
+  end
+
+  def call_private_method
+    private_method
   end
 end
 
 
-class ClsTwo
-  def method1
-    puts 'ClsTwo - method1'
+class SubClassOne < ClassOne
+  def call_protected_method
+    protected_method
   end
-
-  def method2
-    puts 'ClsTwo - protected method2'
-  end
-
-  def method3
-    puts 'ClsTwo - ptivate method3'
-  end
-
-  def method4
-    puts 'ClsTwo - public method4'
-  end
-
-  public    :method1, :method4
-  protected :method2
-  private   :method3
 end
 
-class SubTwo < ClsTwo
+
+class ClassTwo
+  def default_method
+    puts 'ClassTwo - default_method'
+  end
+
+  def protected_method
+    puts 'ClassTwo - protected_method'
+  end
+
+  def private_method
+    puts 'ClassTwo - private_method'
+  end
+
+  def public_method
+    puts 'ClassTwo - public_method'
+  end
+
+  public    :default_method, :public_method
+  protected :protected_method
+  private   :private_method
 end
 
-clsOne = ClsOne.new
-clsOne.method1
-# clsOne.method2  # in `<main>': protected method `method2' called for
-                  #<ClsOne:0x007faa5d084030> (NoMethodError)
-# clsOne.method3  # private method `method3' called for
-                  #<ClsOne:0x007fbd08984078> (NoMethodError)
-clsOne.method4
+class SubTwo < ClassTwo
+end
 
-# ClsTwo.method1  # in `<main>': undefined method `method1' for ClsTwo:Class (NoMethodError)
-# ClsTwo.method2  # in `<main>': undefined method `method2' for ClsTwo:Class (NoMethodError)
-# ClsTwo.method3  # in `<main>': undefined method `method3' for ClsTwo:Class (NoMethodError)
-# ClsTwo.method4  # in `<main>': undefined method `method4' for ClsTwo:Class (NoMethodError)
 
-# SubTwo.method1  # in `<main>': undefined method `method1' for SubTwo:Class (NoMethodError)
-# SubTwo.method2  # in `<main>': undefined method `method2' for SubTwo:Class (NoMethodError)
-# SubTwo.method3  # in `<main>': undefined method `method3' for SubTwo:Class (NoMethodError)
-# SubTwo.method4  # in `<main>': undefined method `method4' for SubTwo:Class (NoMethodError)
+classone = ClassOne.new
+classone.default_method
+classone.public_method
 
-subTwo = SubTwo.new
-subTwo.method1
-# subTwo.method2  # protected method `method2' called for #<SubTwo:0x007f826a097f60> (NoMethodError)
-# subTwo.method3  # in `<main>': private method `method3' called for #<SubTwo:0x007faafc177f60> (NoMethodError)
-subTwo.method4
+# ruby_class_access_control.rb:77:in `<main>': private method `private_method' called for #<ClassOne:0x007fa28385f160> (NoMethodError)
+# classone.private_method
+
+classone.call_private_method
