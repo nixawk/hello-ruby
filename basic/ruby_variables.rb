@@ -28,3 +28,13 @@ puts person1
 # person1 and person2 changed from ``Tim'' to ``Jim''
 # It all comes back to that variables hold references to objects, not the
 # objects themselves.
+
+# Example variables and class names
+# Variables
+# Local           Global          Instance       Class          Class Names
+#
+# name            $debug          @name          @@total        PI
+# fishAndChips    $CUSTOMER       @point_1       @@symtab       FeetPerMile
+# x_axis          $_              @X             @@N            String
+# thx1138         $plan9          @_             @@x_pos        MyClass
+# _26             $Global         @plan9         @@SINGLE       Jazz_Song

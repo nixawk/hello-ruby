@@ -1,13 +1,14 @@
 
 # Ruby comes with a comprehensive I/O library. However, in most of the
 # examples in this book we'll stick to a few simple methods. We've already
-# come across two methods that do output. puts writes each of its arguments,
-# adding a newline after each. print also writes its arguments, but with no
-# newline. Both can be used to write to any I/O object, but by default they
-# write to the console.
+# come across two methods that do output. 
+
+# [puts] writes each of its arguments, adding a newline after each. print also
+# writes its arguments, but with no newline. Both can be used to write to any
+# I/O object, but by default they write to the console.
 #
-# Another output method we use a lot is printf, which prints its arguments
-# under the control of a format string (just like printf in C or Perl)
+# [printf] prints its arguments under the control of a format string (just like
+#  printf in C or Perl)
 #
 printf "Number: %5.2f, String: %s", 1.23, "Hello"
 
