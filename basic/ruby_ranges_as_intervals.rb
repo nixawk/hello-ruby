@@ -1,6 +1,8 @@
 #!/usr/bin/ruby
 
-# ==== Used to test equality within a when clause of a case statement
+# A final use of the versatile range is as an interval test: seeing if
+# some value falls within the interval represented by the range. This
+# is done using ===, the case equality operator.
 
 if ((1..10) === 5)
   puts "5 lies in (1..10)"
