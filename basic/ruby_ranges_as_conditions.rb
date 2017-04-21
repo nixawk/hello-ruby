@@ -1,6 +1,13 @@
 #!/usr/bin/ruby
 
+# Ranges as Conditions
+
 # Ranges may also be used as conditional expressions.
+
+# As well as representing sequences, ranges may also be used as conditional
+# expressions. For example, the following code fragment prints sets of lines
+# from standard input, where the first line in each set contains the word "start"
+# and the last line the word "end".
 
 score = 70
 
