@@ -20,10 +20,10 @@ def showRE(aString, pattern)
   end
 end
 
-puts showRE("this is\nthe time", /^the/)
-puts showRE("this is\nthe time", /is$/)
-puts showRE("this is\nthe time", /\Athis/)
-puts showRE("this is\nthe time", /\Athe/)
+puts showRE("this is\nthe time", /^the/)    # this is \n<<the>> time
+puts showRE("this is\nthe time", /is$/)     # this <<is>>\nthe time
+puts showRE("this is\nthe time", /\Athis/)  # <<this>> is\nthe time
+puts showRE("this is\nthe time", /\Athe/)   # no match
 
 # Similarly, the patterns \b and \B match word boundaries and nonword
 # boundaries, respectively. Word characters are letters, numbers and
