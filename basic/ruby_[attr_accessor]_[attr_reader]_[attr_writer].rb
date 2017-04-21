@@ -6,14 +6,14 @@
 # attr_writer: var
 
 class Person
-  attr_writer :age
+  ## attr_writer :age
 
   # /* same as follow code*/
   # def age=(value)
   #   @age = value
   # end
 
-  attr_reader :age
+  ## attr_reader :age
 
   # /* same as follow code*/
   # def age
@@ -21,5 +21,10 @@ class Person
   # end
 
   # attr_accessor :age = attr_reader :age + attr_writer :age
-
+  attr_accessor :age
 end
+
+
+jack = Person.new
+jack.age = 25
+puts jack.age
